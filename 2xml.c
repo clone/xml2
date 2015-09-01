@@ -103,7 +103,7 @@ static void leave(const char *name)
 		if (!do_html && in_tag)
 			fputs("/>",stdout);
 		else {
-			htmlElemDescPtr elem = NULL;
+			const htmlElemDesc *elem = NULL;
 			if (do_html) elem = htmlTagLookup(name);
 			finish_tag();
 			if (NULL == elem || (!elem->endTag && !elem->empty)) {
@@ -116,7 +116,7 @@ static void leave(const char *name)
 	}
 }
 
-static void characters(const char *stuff,const char *context)
+static void chars(const char *stuff,const char *context)
 {
 	switch (context[0]) {
 	case '!':
@@ -183,7 +183,7 @@ static void line(char *data)
 	}
 
 	if (NULL == name && NULL == *ptr && NULL != content)
-		characters("\n",context);
+		chars("\n",context);
 
 	release(ptr);
 
@@ -204,7 +204,7 @@ static void line(char *data)
 	}
 
 	*ptr = NULL;
-	if (NULL != content) characters(content,context);
+	if (NULL != content) chars(content,context);
 }
 
 int main(int argc,char *argv[])
