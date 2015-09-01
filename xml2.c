@@ -24,8 +24,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#include <parser.h>
-#include <HTMLparser.h>
+#include <libxml/parser.h>
+#include <libxml/HTMLparser.h>
 
 struct node
 {
@@ -247,8 +247,7 @@ int main(int argc,char *argv[])
 	init(&sax);
 
 	if (1 == argc && !strcmp(name,"html2")) {
-		ctxt = htmlCreatePushParserCtxt(&sax,NULL,NULL,0,"stdin",
-		                                XML_CHAR_ENCODING_8859_1);
+		ctxt = htmlCreatePushParserCtxt(&sax,NULL,NULL,0,"stdin",0);
 		parseChunk = htmlParseChunk;
 		freeCtxt = htmlFreeParserCtxt;
 		do_compress_whitespace = 1;

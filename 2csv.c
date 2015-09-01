@@ -4,7 +4,8 @@
 #include <string.h>
 
 void usage(void) {
-	fputs("usage: 2csv record field [field ...] < in > csv\n",stderr);
+	fputs("usage: 2csv [-q quote] [-d comma] "
+	      "record field [field ...] < in > csv\n",stderr);
 	exit(2);
 }
 
@@ -83,7 +84,7 @@ int main(int argc,char *argv[]) {
 			&& !strcmp(buffer + len - field_len[i],argv[i])
 			&& (field_len[i] == len 
 			||  '/' == buffer[len - field_len[i] - 1]))
-				fields[i] = strdup(eq);
+				fields[i] = strdup(eq ? eq : "");
 		}
 
 		len = 0;

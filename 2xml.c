@@ -24,7 +24,7 @@
 #include <assert.h>
 #include <ctype.h>
 
-#include <HTMLparser.h>
+#include <libxml/HTMLparser.h>
 
 int do_html;
 int in_tag = 0;
@@ -104,7 +104,7 @@ static void leave(const char *name)
 			fputs("/>",stdout);
 		else {
 			const htmlElemDesc *elem = NULL;
-			if (do_html) elem = htmlTagLookup(name);
+			if (do_html) elem = htmlTagLookup((xmlChar *) name);
 			finish_tag();
 			if (NULL == elem || (!elem->endTag && !elem->empty)) {
 				fputs("</",stdout);

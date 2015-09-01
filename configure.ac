@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(xml2, 0.4, egnor@ofb.net)
+AC_INIT(xml2, 0.5, egnor@ofb.net)
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_SRCDIR([2csv.c])
 AC_CONFIG_HEADER([config.h])
@@ -11,7 +11,7 @@ AC_CONFIG_HEADER([config.h])
 AC_PROG_CC
 
 # Checks for libraries.
-PKG_CHECK_MODULES(XML, libxml)
+PKG_CHECK_MODULES(XML, libxml-2.0)
 AC_SUBST(XML_LIBS)
 AC_SUBST(XML_CFLAGS)
 

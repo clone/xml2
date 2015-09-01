@@ -57,13 +57,14 @@ am_2csv_OBJECTS = 2csv.$(OBJEXT)
 2csv_LDADD = $(LDADD)
 am_2xml_OBJECTS = 2xml.$(OBJEXT)
 2xml_OBJECTS = $(am_2xml_OBJECTS)
-2xml_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+2xml_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_csv2_OBJECTS = csv2.$(OBJEXT)
 csv2_OBJECTS = $(am_csv2_OBJECTS)
 csv2_LDADD = $(LDADD)
 am_xml2_OBJECTS = xml2.$(OBJEXT)
 xml2_OBJECTS = $(am_xml2_OBJECTS)
-xml2_DEPENDENCIES =
+xml2_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -125,9 +126,12 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
+PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -169,11 +173,11 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-AM_CPPFLAGS = $(XML_CFLAGS)
+AM_CFLAGS = $(XML_CFLAGS)
 xml2_SOURCES = xml2.c
-xml2_LDADD = -lxml
+xml2_LDADD = $(XML_LIBS)
 2xml_SOURCES = 2xml.c
-2xml_LDADD = -lxml
+2xml_LDADD = $(XML_LIBS)
 csv2_SOURCES = csv2.c
 2csv_SOURCES = 2csv.c
 all: config.h
@@ -370,7 +374,8 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
-	-find $(distdir) -type d ! -perm -777 -exec chmod a+rwx {} \; -o \
+	-find "$(distdir)" -type d ! -perm -755 \
+		-exec chmod u+rwx,go+rx {} \; -o \
 	  ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
 	  ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
 	  ! -type d ! -perm -444 -exec $(SHELL) $(install_sh) -c -m a+r {} {} \; \
