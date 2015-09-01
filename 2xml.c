@@ -133,11 +133,16 @@ static void characters(const char *stuff,const char *context)
 		case '>': fputs("&gt;",stdout);    break;
 		case '"': fputs("&quot;",stdout);  break;
 		default:
+#if 1
+			putchar(*stuff);
+			break;
+#else
 			if (isprint(*stuff) || isspace(*stuff)) {
 				putchar(*stuff);
 				break;
 			}
 			printf("&#%d;",(unsigned char) *stuff);
+#endif
 		}
 	}
 }

@@ -1,6 +1,6 @@
-VERSION=0.2
+VERSION=0.3
 
-FILES=xml2 html2 2html 2xml csv2
+FILES=xml2 html2 2html 2xml csv2 2csv
 TAR=xml2-$(VERSION).tar.gz
 DIR=xml2-$(VERSION)
 
@@ -19,6 +19,8 @@ html2:
 	ln -sf 2xml 2html
 
 csv2: csv2.c
+
+2csv: 2csv.c
 
 clean:
 	$(RM) *.o $(FILES) xml2-*
