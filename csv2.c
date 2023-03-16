@@ -58,7 +58,7 @@ void field(int num,const char *begin,const char *end) {
 			fputs(field_names[num],stdout);
 		else
 			printf("field%d",num);
-		printf("=%.*s\n",end - begin,begin);
+		printf("=%.*s\n", (int)(end - begin), begin);
 	}
 }
 
