@@ -1,4 +1,4 @@
-export CPATH = /usr/include/libxml2
+export CPATH := /usr/include/libxml2:/usr/local/include/libxml2:$(CPATH)
 
 LDLIBS = -lxml2
 
